@@ -16,7 +16,7 @@ const MAX_LENGTH = 800;
 
 const SLOPE = Math.PI / 3;
 
-function drawKoch(depth, pointA, pointB) {
+function drawKoch(depth, pointA, pointB, angle, length) {
   if (depth === 0) {
     context.beginPath();
     context.moveTo(pointA.x, pointA.y);
@@ -25,9 +25,6 @@ function drawKoch(depth, pointA, pointB) {
 
     return;
   }
-
-  const angle = Math.atan2(pointB.y - pointA.y, pointB.x - pointA.x);
-  const length = Math.sqrt(Math.pow(pointB.x - pointA.x, 2) + Math.pow(pointB.y - pointA.y, 2));
 
   const pointC = {
     x: pointA.x + length / 3 * Math.cos(angle),
@@ -52,30 +49,38 @@ function drawKoch(depth, pointA, pointB) {
   drawKoch(
     depth - 1,
     pointA,
-    pointC
+    pointC,
+    angle,
+    length / 3
   );
 
   drawKoch(
     depth - 1,
     pointC,
-    pointD
+    pointD,
+    angle - SLOPE,
+    length / 3
   );
 
   drawKoch(
     depth - 1,
     pointD,
-    pointE
+    pointE,
+    angle + SLOPE,
+    length / 3
   );
 
   drawKoch(
     depth - 1,
     pointE,
-    pointF
+    pointF,
+    angle,
+    length / 3
   );
 }
 
 drawKoch(
-  6,
+  8,
   {
     x: WIDTH_CENTER - MAX_LENGTH / 2,
     y: HEIGHT_CENTER
@@ -83,5 +88,7 @@ drawKoch(
   {
     x: WIDTH_CENTER + MAX_LENGTH / 2,
     y: HEIGHT_CENTER
-  }
+  },
+  0,
+  800
 );
