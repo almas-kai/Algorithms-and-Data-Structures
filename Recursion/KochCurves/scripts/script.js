@@ -18,11 +18,7 @@ const SLOPE = Math.PI / 3;
 
 function drawKoch(depth, pointA, pointB, angle, length) {
   if (depth === 0) {
-    context.beginPath();
-    context.moveTo(pointA.x, pointA.y);
     context.lineTo(pointB.x, pointB.y);
-    context.stroke();
-
     return;
   }
 
@@ -79,6 +75,8 @@ function drawKoch(depth, pointA, pointB, angle, length) {
   );
 }
 
+context.beginPath();
+
 drawKoch(
   8,
   {
@@ -92,3 +90,5 @@ drawKoch(
   0,
   800
 );
+
+context.stroke();
