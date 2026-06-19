@@ -22,24 +22,28 @@ function drawKoch(depth, pointA, pointB, angle, length) {
     return;
   }
 
+  length = length / 3;
+  const dx = length * Math.cos(angle);
+  const dy = length * Math.sin(angle);
+
   const pointC = {
-    x: pointA.x + length / 3 * Math.cos(angle),
-    y: pointA.y + length / 3 * Math.sin(angle)
+    x: pointA.x + dx,
+    y: pointA.y + dy
   };
 
   const pointD = {
-    x: pointC.x + length / 3 * Math.cos(angle - SLOPE),
-    y: pointC.y + length / 3 * Math.sin(angle - SLOPE)
+    x: pointC.x + length * Math.cos(angle - SLOPE),
+    y: pointC.y + length * Math.sin(angle - SLOPE)
   };
 
   const pointE = {
-    x: pointD.x + length / 3 * Math.cos(angle + SLOPE),
-    y: pointD.y + length / 3 * Math.sin(angle + SLOPE)
+    x: pointD.x + length * Math.cos(angle + SLOPE),
+    y: pointD.y + length * Math.sin(angle + SLOPE)
   };
 
   const pointF = {
-    x: pointE.x + length / 3 * Math.cos(angle),
-    y: pointE.y + length / 3 * Math.sin(angle)
+    x: pointE.x + dx,
+    y: pointE.y + dy
   };
 
   drawKoch(
@@ -47,7 +51,7 @@ function drawKoch(depth, pointA, pointB, angle, length) {
     pointA,
     pointC,
     angle,
-    length / 3
+    length
   );
 
   drawKoch(
@@ -55,7 +59,7 @@ function drawKoch(depth, pointA, pointB, angle, length) {
     pointC,
     pointD,
     angle - SLOPE,
-    length / 3
+    length
   );
 
   drawKoch(
@@ -63,7 +67,7 @@ function drawKoch(depth, pointA, pointB, angle, length) {
     pointD,
     pointE,
     angle + SLOPE,
-    length / 3
+    length
   );
 
   drawKoch(
@@ -71,7 +75,7 @@ function drawKoch(depth, pointA, pointB, angle, length) {
     pointE,
     pointF,
     angle,
-    length / 3
+    length
   );
 }
 
